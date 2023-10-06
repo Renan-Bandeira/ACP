@@ -1,0 +1,19 @@
+apt --help
+apt-get --help
+
+apt instal pacote:
+apt instal ./pacote.deb: instala pacote local com extensão deb
+apt remove pacote -Y:
+apt edit-sources: lista e pode adicionar repositorios
+apt list: lista os pacotes disponiveis
+apt list --installed: mostra os pacotes instalados
+apt list --upgradeable: mostra os pacotes com atualizações disponiveis
+apt search apache: faz uma busca dos pacotes apache
+
+criar um snapshots antes de atualizar
+apt update: atualiza os pacotes
+apt upgrade -Y: instala as atalizações
+
+wget: soft de download
+unzip: soft de descompactamento
+unrar:
