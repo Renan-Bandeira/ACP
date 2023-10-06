@@ -1,0 +1,190 @@
+sudo apt update
+sudo apt install ubuntu-gnome-desktop
+
+trocar o leitor de inteface
+sudo nano /etc/default/display-manager
+Altere a linha DISPLAY_MANAGER=gdm3 para DISPLAY_MANAGER=lightdm ou vice-versa.
+# DISPLAY_MANAGER=gdm3
+DISPLAY_MANAGER=lightdm
+
+
+sudo apt update && sudo apt install cinnamon-desktop-environment
+
+
+sudo add-apt-repository ppa:embrosyn/cinnamon
+sudo apt update
+sudo apt install cinnamon
+
+sudo add-apt-repository --remove ppa:nome-do-ppa
+
+-----------------------------------------------------------------------------------------
+listar arquivos
+ls -l
+ls -a: mostra arquivos ocultos
+ls | more: rolar a pagina com o enter
+ls "letra" + tab: ou ls "letra"+*: busca arquivo no diretorio: Obs: o segundo mostra diretorio interno
+ls m?g*: buscar pesonalizada: ? = qualquer letra: * = todos
+ls /etc/p*
+ls -h: tamanho de arquivos em formato humano
+ls -d */: lista apenas diretorios
+
+
+busca varios arquivos em sequencia:
+exemplo: ls arquivo[1-3]* ou .txt: busca varios arquivos em sequencia
+outros: 
+[1-3]* = 1 ao 3
+[1,3]* = 1 e 3
+[^1-3]* = todos menos 1 ou 3
+[^1,3]* = todos menos 1 e 3
+------------------------------------------------------------------------------------------------------
+find -name arq*: busca arquivo
+
+cd
+cd /: raiz
+cd ..: volta
+cd ../etc: volta e troca diretorio
+cd ~: vai pro diretorio do usuario
+mkdir /documentos: cria diretorio
+mkdir 'meus documentos': cria diretorio
+rmdir arquivo 1 arquivo 2:
+rm ou rm * ou rm *.txt: apaga arquivo
+rm -rf pastateste/: apaga pastateste e tudo dentro do diretorio
+touch arquivo.txt: cria arquivo
+pwd
+df -h: tamanho do disco
+ip addr
+ifconfig
+--help
+man: semelhante ao --help: exp: man ls
+help: semelhante ao --help: exp: help cd
+echo:
+ip a
+Ctrl + L : limpar terminal
+Ctrl + C : voltar
+Ctrl + Alt + T: abrir o terminal
+tab+tab: mostra tudo no diretorio: exp: cd /ver/tab+tab
+tab: auto complete
+nano: bloco de nota
+nano leia-me.txt: abre ou cria um arquivo de texto caso não exista
+
+sudo systemctl status "programa": verifica o status de um programa
+sudo systemctl restart "programa":
+
+----------------------------------------------------------
+historico de comandos
+history: mosta o historico de comandos do usuario logado
+history 30: mostra 30 comandos
+export: cria uma variavel de ambiente
+export HISTTIMEFORMAT= "%c ": %d %m %y %h %s: %t time (y-m-d format): %f full date (h:m:s format): "%c " complete obs muda o comando history
+history | grep "planilhas": mostra os ultimos comandos que foram feitos em planilhas
+history | grep "ls": busca o comandos usados recentemente: obs: funciona em termos
+!"numero do comando": executa o comando indicado no numero
+!!: executa o ultimo comando
+!?ls?: busca um comando e executa
+history -c: apaga o historico
+set +o history: desativa o history
+set -o history: ativa o history
+history -w: salva o historico em um arquivo
+configurar o tamanho do history por usuario
+/home: editar o .bashrc: HISTSIZE=1000
+
+--------------------------------------
+vi
+vi: bloco de nota
+vi leia-me.txt: abre ou cria um arquivo de texto caso não exista
+i: ativa o modo de edição
+exc: sai do modo edição
+:wq: salva e sai: obs: "bash_history" fica no /home
+
+
+
+--------------------------------------------------------------------------------------------
+/home: ~: diretorio do usuario
+sudo apt update
+sudo apt upgrade
+sudo systemctl status APP
+sudo systemctl stop APP
+sudo APP -v
+sudo apt-get install APP
+sudo apt-get remove APP
+
+----------------------------------------------------------------------------
+ADM
+cat: leitor de texto
+sudo cat /etc/sudoers: abre arquivo de configuração do sudo
+sudo passwd root: atibui uma senha pro root "ubuntu"
+su: troca para o super usuario
+su usuario: troca pra um usuario, se estiver no root não precisa de senha
+sudo nano /etc/ssh/sshd_config: PermitRootLogin yes: permite acesso ao root remotamente
+
+--------------------------------------------------------------------------------------------
+Trabalhando com usuarios
+sudo useradd "Login": cria um novo usuario
+sudo usermod "login": modifica um usuario
+sudo userdel -f -r "nome": apaga um usuario e pasta home
+cat /etc/passwd: ver usuarios criados
+
+sudo useradd "Login" -m -c "nome do pc" -s /bin/bash -p $(openssl passwd -crypt "senha") -G "grupo": cria um novo usuario: obs: -e 00/00/0000: cria usuario temporario
+sudo passwd "Login": cria uma senha
+sudo passwd "Login" -e 00/00/0000: cria uma senha temporaria: obs: se deixar vazio, o usuario decide a senha
+sudo chsh -s /bin/bash "login": coloca um shell para um usuario
+--------------------------------------------------------------------------------------------
+grupos
+cat /etc/group: visualiza todos os grupos
+groupadd "NOME_GRUPO": cria grupo
+groupdel "NOME_GRUPO": apaga grupo
+usermod -G adm,sudo "login": muda o usuario para o grupo adm e sudo
+gpasswd -d "Login" sudo: remove um usuario apenas de 1 grupo
+
+-------------------------
+permissão dos grupos
+
+cd /home
+ls -l
+
+drwxr-xr-x
+--------------------------
+d=diretorio
+--------------------------
+rwx:usuario dono
+r=read
+w=write
+x=execute
+--------------------------
+r-x:usuarios no grupo
+--------------------------
+r-x:usuarios fora do grupo
+
+------------------------------
+trocar proprietario e grupo do diretorio e de arquivo
+chown login:grupo /diretorio/
+chown login:grupo arquivo.txt
+
+------------------------------
+permissões pesonalizadas
+------------
+leitura (r)4
+gravação(w)2
+execução(x)1
+nenhuma    0
+------------
+obg: as permissões são as somas dos numeros, exemplo: permisão total = 7
+------------
+chmod 750 /diretorio/: 7 permissão do usuario: 5 do grupo: 0 de fora do grupo
+chmod 750 arquivo.txt: 7 permissão do usuario: 5 do grupo: 0 de fora do grupo
+ou
+chmod +x ou -x arquivo.txt
+---------------------------------------------
+criando script
+chmod +x criar_user.sh: da permissão pra executar o arquivo
+./criar_user.sh: execulta o arquivo
+
+nano criar_user.sh
+
+#!/bin/bash
+
+echo "criando usuarios do sistema....": obs: exibe essa menssagem no script
+useradd "login"....: todos os parametros
+echo "finalizado!...."
+date: exibe a data atual
+-----------------------------
