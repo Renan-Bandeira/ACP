@@ -54,7 +54,7 @@ rm -rf pastateste/: apaga pastateste e tudo dentro do diretorio
 touch arquivo.txt: cria arquivo
 pwd
 reboot
-shutdown -0
+shutdown 0
 ip addr
 ifconfig
 --help
@@ -139,9 +139,11 @@ sudo nano /etc/ssh/sshd_config: PermitRootLogin yes: permite acesso ao root remo
 
 --------------------------------------------------------------------------------------------
 Trabalhando com usuarios
+
 w: lista usuarios logados
 who -a: ver o PID "numero do processo" dos usuarios
 kill PID: desconecta um usuario
+
 sudo useradd "Login": cria um novo usuario
 sudo usermod "login": modifica um usuario
 sudo userdel -f -r "nome": apaga um usuario e pasta home
