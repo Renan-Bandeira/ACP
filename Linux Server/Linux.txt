@@ -51,7 +51,8 @@ rm ou rm * ou rm *.txt: apaga arquivo
 rm -rf pastateste/: apaga pastateste e tudo dentro do diretorio
 touch arquivo.txt: cria arquivo
 pwd
-df -h: tamanho do disco
+reboot
+shutdown -0
 ip addr
 ifconfig
 --help
@@ -188,3 +189,33 @@ useradd "login"....: todos os parametros
 echo "finalizado!...."
 date: exibe a data atual
 -----------------------------
+discos
+
+Macos HFS
+Unix/Linux Ext3,Ext4,XFS
+Windows FAT32, NTFS
+
+disco em linux
+sda disco
+ sda1 particão
+sdb disco
+ sdb1 parição
+----------------------
+listar discos: lsblk ou fdisk -l
+df -h: tamanho do disco
+
+criar partições
+fdisk /dev/sda: n: w: salva e sai
+
+formatar a partição
+mkfs.ext4 /dev/sdb
+
+montar disco
+cd /mnt
+mkdir disco2
+mount /dev/sdb /mnt/disco2/
+umount /dev/sdb
+
+montar disco automaticamente
+nano /etc/fstab
+/dev/sdb /mnt/disco2/ ext4 defaults 0 0
