@@ -36,9 +36,10 @@ outros:
 [1,3]* = 1 e 3
 [^1-3]* = todos menos 1 ou 3
 [^1,3]* = todos menos 1 e 3
-------------------------------------------------------------------------------------------------------
+
 find -name arq*: busca arquivo
 
+------------------------------------------------------------------------------------------------------
 cd
 cd /: raiz
 cd ..: volta
@@ -49,6 +50,7 @@ mkdir 'meus documentos': cria diretorio
 rmdir arquivo 1 arquivo 2:
 rm ou rm * ou rm *.txt: apaga arquivo
 rm -rf pastateste/: apaga pastateste e tudo dentro do diretorio
+
 touch arquivo.txt: cria arquivo
 pwd
 reboot
@@ -59,6 +61,7 @@ ifconfig
 man: semelhante ao --help: exp: man ls
 help: semelhante ao --help: exp: help cd
 echo:
+prompt: pergunta antes de realizar ações
 ip a
 Ctrl + L : limpar terminal
 Ctrl + C : voltar
@@ -70,6 +73,22 @@ nano leia-me.txt: abre ou cria um arquivo de texto caso não exista
 
 sudo systemctl status "programa": verifica o status de um programa
 sudo systemctl restart "programa":
+
+copiar arquivo
+
+cp /home/user/arquivo.txt /disk2/ -r -i -v: copia tudo "-r", verifica arquivos iguais "-i", -v mostra o que ta acontecendo
+cp /home/user/arquivo.txt /disk2/: obg: se você estiver no diretorio, não precisa informar, exemplo: cp ./arquivo.txt /disk2/
+cp /home/user/*.txt /disk2/: copia todos os arquivos .txt
+cp ./a* disk2: copia todos os arquivos que começa com a
+
+movendo arquivo
+mv /home/user/arquivo.txt /disk2/ -i -v: verifica arquivos iguais "-i", -v mostra o que ta acontecendo
+mv /home/user/arquivo.txt /disk2/arquvo2: renomeia quando move
+mv /home/user/* /disk2/: move tudo
+
+renomear arquivo
+mv arquivo.txt arquivo2.txt
+
 
 ----------------------------------------------------------
 historico de comandos
@@ -120,6 +139,9 @@ sudo nano /etc/ssh/sshd_config: PermitRootLogin yes: permite acesso ao root remo
 
 --------------------------------------------------------------------------------------------
 Trabalhando com usuarios
+w: lista usuarios logados
+who -a: ver o PID "numero do processo" dos usuarios
+kill PID: desconecta um usuario
 sudo useradd "Login": cria um novo usuario
 sudo usermod "login": modifica um usuario
 sudo userdel -f -r "nome": apaga um usuario e pasta home
@@ -129,6 +151,7 @@ sudo useradd "Login" -m -c "nome do pc" -s /bin/bash -p $(openssl passwd -crypt 
 sudo passwd "Login": cria uma senha
 sudo passwd "Login" -e 00/00/0000: cria uma senha temporaria: obs: se deixar vazio, o usuario decide a senha
 sudo chsh -s /bin/bash "login": coloca um shell para um usuario
+
 --------------------------------------------------------------------------------------------
 grupos
 cat /etc/group: visualiza todos os grupos
@@ -175,6 +198,7 @@ chmod 750 /diretorio/: 7 permissão do usuario: 5 do grupo: 0 de fora do grupo
 chmod 750 arquivo.txt: 7 permissão do usuario: 5 do grupo: 0 de fora do grupo
 ou
 chmod +x ou -x arquivo.txt
+
 ---------------------------------------------
 criando script
 chmod +x criar_user.sh: da permissão pra executar o arquivo
@@ -188,6 +212,7 @@ echo "criando usuarios do sistema....": obs: exibe essa menssagem no script
 useradd "login"....: todos os parametros
 echo "finalizado!...."
 date: exibe a data atual
+
 -----------------------------
 discos
 
@@ -200,6 +225,7 @@ sda disco
  sda1 particão
 sdb disco
  sdb1 parição
+
 ----------------------
 listar discos: lsblk ou fdisk -l
 df -h: tamanho do disco
@@ -219,3 +245,10 @@ umount /dev/sdb
 montar disco automaticamente
 nano /etc/fstab
 /dev/sdb /mnt/disco2/ ext4 defaults 0 0
+
+------------------------
+controlando processos
+ps: lista processos
+ps aux: "a" todos os usuarios, "u" horario de inicio, x processos iniciados fora do console
+kill "(PID),numero do processo": finaliza o processo, obs: serve para desconectar um usuario
+killall chrome: fecha todos os processos pelo nome
