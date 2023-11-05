@@ -1,0 +1,38 @@
+servidor de arquivo
+-----------------------
+
+windows
+protocolo smb samba
+
+https://wiki.samba.org/index.php/Main_Page
+
+apt install samba
+
+--------------------------------------
+Configuração de acesso publico do samba
+
+criar uma pasta no disco 2
+
+nano /etc/samba/smb.conf
+[publica]: nome do compartilhamento
+
+path = /mnt/disco2/publica
+
+writable = yes: permite escrita
+guest ok = yes: permite convidados
+guest only = yes: todos que acessarem serão convidados
+
+daemon: serviço segundo plano
+systemctl restart smbd: reinstarta o samba
+systemctl status smbd: verifica status
+
+systemctl enable smbd: inicia o samba automaticamente
+
+------------------------------------------
+acessando o servidor
+
+no windows digite na barra de endereço
+\\192.168.1.13\publica: ip da maguina + o compartilhamento publico
+
+mapear caminho de rede
+botão direito em "este computador" mapear unidade de rede, defina uma letra para a unidade e o endereço
